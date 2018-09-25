@@ -1,12 +1,17 @@
 package com.lyphomed.nishantpatel.projectguestlogix.data.manager;
 
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.callbacks.OnTaskCompletion;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airports;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.AirlinesDatabase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataAvailabilityUseCase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataInsertionUseCase;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataQueryUseCase;
 
 import java.io.InputStream;
+import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 /**
@@ -16,6 +21,7 @@ import io.reactivex.Observable;
 public class DataManager implements DataContract {
     private static DataInsertionUseCase mDataInsertionUseCase;
     private static DataAvailabilityUseCase sDataAvailabilityUseCase;
+    private static DataQueryUseCase sDataQueryUseCase;
     private static DataManager sDataManager;
     private static AirlinesDatabase sAirlinesDatabase;
 
@@ -25,7 +31,7 @@ public class DataManager implements DataContract {
             sDataManager = new DataManager();
             mDataInsertionUseCase = new DataInsertionUseCase(sAirlinesDatabase);
             sDataAvailabilityUseCase = new DataAvailabilityUseCase(sAirlinesDatabase);
-
+            sDataQueryUseCase = new DataQueryUseCase(sAirlinesDatabase);
         }
         return sDataManager;
     }
@@ -64,5 +70,15 @@ public class DataManager implements DataContract {
     @Override
     public void checkDataAvailability(OnTaskCompletion callback) {
         sDataAvailabilityUseCase.checkDataAvailability(callback);
+    }
+
+    @Override
+    public Flowable<List<Routes>> provideFlightDetails(String origin, String destination) {
+        return sDataQueryUseCase.provideFlightDetails(origin, destination);
+    }
+
+    @Override
+    public Flowable<List<Airports>> provideAirportFromIata3(String iata3) {
+        return sDataQueryUseCase.provideAirportFromIata3(iata3);
     }
 }

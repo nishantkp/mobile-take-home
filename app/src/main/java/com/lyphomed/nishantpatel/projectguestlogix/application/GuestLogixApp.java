@@ -27,6 +27,21 @@ public class GuestLogixApp extends Application {
             @Override
             public void onTaskComplete() {
                 // This means we have data present in the database, so no need to perform insertion
+//                dataManager.provideFlightDetails("ABJ", "BRU").subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(data -> {
+//                            for (Routes r : data) {
+//                                Log.i("Data", r.getAirlineCode() + " " + r.getOrigin() + " " + r.getDestination());
+//                            }
+//                        });
+
+//                dataManager.provideAirportFromIata3("ABJ").subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(data -> {
+//                            for (Airports a : data) {
+//                                Log.i("data", a.getAirportCode() + " " + a.getAirportName() + " " + a.getCity() + " " + a.getCountry() + " " + a.getLatitude() + " " + a.getLongitude());
+//                            }
+//                        });
             }
 
             @Override
