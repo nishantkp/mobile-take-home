@@ -22,8 +22,7 @@ public class Routes {
     @ColumnInfo(name = "destination")
     private String mDestination;
 
-    public Routes(int id, String airlineCode, String origin, String destination) {
-        this.mId = id;
+    public Routes(String airlineCode, String origin, String destination) {
         this.mAirlineCode = airlineCode;
         this.mOrigin = origin;
         this.mDestination = destination;

@@ -31,8 +31,7 @@ public class Airports {
     @ColumnInfo(name = "longitude")
     private String mLongitude;
 
-    public Airports(int id, String airportName, String city, String country, String airportCode, String latitude, String longitude) {
-        this.mId = id;
+    public Airports(String airportName, String city, String country, String airportCode, String latitude, String longitude) {
         this.mAirportName = airportName;
         this.mCity = city;
         this.mCountry = country;
