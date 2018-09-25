@@ -19,7 +19,7 @@ public class Routes {
     @ColumnInfo(name = "origin")
     private String mOrigin;
 
-    @ColumnInfo(name = "mDestination")
+    @ColumnInfo(name = "destination")
     private String mDestination;
 
     public Routes(int id, String airlineCode, String origin, String destination) {
