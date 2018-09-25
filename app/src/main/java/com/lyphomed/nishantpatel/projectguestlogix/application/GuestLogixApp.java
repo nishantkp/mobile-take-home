@@ -3,7 +3,7 @@ package com.lyphomed.nishantpatel.projectguestlogix.application;
 import android.app.Application;
 
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.callbacks.OnTaskCompletion;
-import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.AirlinesDatabase;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.AirlinesDatabase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.utils.TableDataCreation;
 

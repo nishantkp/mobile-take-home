@@ -1,7 +1,7 @@
 package com.lyphomed.nishantpatel.projectguestlogix.data.manager;
 
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.callbacks.OnTaskCompletion;
-import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.AirlinesDatabase;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.AirlinesDatabase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataAvailabilityUseCase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataInsertionUseCase;
 

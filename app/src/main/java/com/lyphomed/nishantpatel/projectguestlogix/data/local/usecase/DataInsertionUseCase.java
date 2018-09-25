@@ -2,10 +2,10 @@ package com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase;
 
 import android.util.Log;
 
-import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.AirlinesDatabase;
-import com.lyphomed.nishantpatel.projectguestlogix.ui.model.Airlines;
-import com.lyphomed.nishantpatel.projectguestlogix.ui.model.Airports;
-import com.lyphomed.nishantpatel.projectguestlogix.ui.model.Routes;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.AirlinesDatabase;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airlines;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airports;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 
 import java.io.BufferedReader;
 import java.io.IOException;

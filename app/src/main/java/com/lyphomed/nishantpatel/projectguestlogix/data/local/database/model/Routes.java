@@ -1,4 +1,4 @@
-package com.lyphomed.nishantpatel.projectguestlogix.ui.model;
+package com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

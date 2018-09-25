@@ -1,7 +1,7 @@
 package com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase;
 
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.callbacks.OnTaskCompletion;
-import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.AirlinesDatabase;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.AirlinesDatabase;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

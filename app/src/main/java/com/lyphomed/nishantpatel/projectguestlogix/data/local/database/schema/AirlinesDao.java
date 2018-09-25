@@ -1,12 +1,12 @@
-package com.lyphomed.nishantpatel.projectguestlogix.data.local.database;
+package com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.lyphomed.nishantpatel.projectguestlogix.ui.model.Airlines;
-import com.lyphomed.nishantpatel.projectguestlogix.ui.model.Airports;
-import com.lyphomed.nishantpatel.projectguestlogix.ui.model.Routes;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airlines;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airports;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 
 import java.util.List;
 
