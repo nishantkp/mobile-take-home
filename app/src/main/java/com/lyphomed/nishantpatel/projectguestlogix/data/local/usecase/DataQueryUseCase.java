@@ -30,7 +30,7 @@ public class DataQueryUseCase {
      * @return Flowable list of Routes
      */
     public Flowable<List<Routes>> provideFlightDetails(String origin, String destination) {
-        return mAirlinesDatabase.getAirliesDao().getDirectRoutes(origin, destination);
+        return mAirlinesDatabase.getAirlinesDao().getDirectRoutes(origin, destination);
     }
 
     /**
@@ -44,7 +44,7 @@ public class DataQueryUseCase {
      * @return Flowable list of airports
      */
     public Flowable<List<Airports>> provideAirportFromIata3(String iata3) {
-        return mAirlinesDatabase.getAirliesDao().getAirportsFromIata(iata3);
+        return mAirlinesDatabase.getAirlinesDao().getAirportsFromIata(iata3);
     }
 
 
@@ -59,7 +59,7 @@ public class DataQueryUseCase {
      * @return Flowable list of {@link Routes}
      */
     public Flowable<List<Routes>> provideAllPathsToViaLocation(String origin, String destination) {
-        return mAirlinesDatabase.getAirliesDao().getPossiblePathsToViaLocation(origin, destination);
+        return mAirlinesDatabase.getAirlinesDao().getPossiblePathsToViaLocation(origin, destination);
     }
 
     /**

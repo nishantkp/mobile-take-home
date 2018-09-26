@@ -26,7 +26,7 @@ public class DataAvailabilityUseCase {
      */
     public void checkDataAvailability(final OnTaskCompletion callback) {
         CompositeDisposable compositeDisposable = new CompositeDisposable();
-        Disposable disposable = mDatabase.getAirliesDao().getAllAirlines()
+        Disposable disposable = mDatabase.getAirlinesDao().getAllAirlines()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(data -> {

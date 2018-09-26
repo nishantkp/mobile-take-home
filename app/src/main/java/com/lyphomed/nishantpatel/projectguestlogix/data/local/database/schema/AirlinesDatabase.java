@@ -34,5 +34,5 @@ public abstract class AirlinesDatabase extends RoomDatabase {
         return sAirlinesDatabase;
     }
 
-    public abstract AirlinesDao getAirliesDao();
+    public abstract AirlinesDao getAirlinesDao();
 }

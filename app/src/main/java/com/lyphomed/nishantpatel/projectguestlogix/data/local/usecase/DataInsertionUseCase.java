@@ -84,7 +84,7 @@ public class DataInsertionUseCase {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] row = line.split(",");
                 airports = new Airports(row[0], row[1], row[2], row[3], row[4], row[5]);
-                mDatabase.getAirliesDao().insertAirports(airports);
+                mDatabase.getAirlinesDao().insertAirports(airports);
             }
             return true;
         } catch (IOException e) {
@@ -117,7 +117,7 @@ public class DataInsertionUseCase {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] row = line.split(",");
                 airlines = new Airlines(row[0], row[1], row[2], row[3]);
-                mDatabase.getAirliesDao().insertAirlines(airlines);
+                mDatabase.getAirlinesDao().insertAirlines(airlines);
             }
             return true;
         } catch (IOException e) {
@@ -149,7 +149,7 @@ public class DataInsertionUseCase {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] row = line.split(",");
                 routes = new Routes(row[0], row[1], row[2]);
-                mDatabase.getAirliesDao().insertRoutes(routes);
+                mDatabase.getAirlinesDao().insertRoutes(routes);
             }
             return true;
         } catch (IOException e) {
