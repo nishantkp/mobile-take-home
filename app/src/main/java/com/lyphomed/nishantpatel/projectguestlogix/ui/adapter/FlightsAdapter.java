@@ -13,6 +13,9 @@ import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RecyclerView Adapter responsible for displaying list of flights
+ */
 public class FlightsAdapter extends RecyclerView.Adapter<FlightsAdapter.FlightsViewHolder> {
     private List<FullViaPath> mFullPathList;
 
@@ -23,7 +26,7 @@ public class FlightsAdapter extends RecyclerView.Adapter<FlightsAdapter.FlightsV
     @NonNull
     @Override
     public FlightsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.via_point_list_item, viewGroup);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.via_point_list_item, viewGroup, false);
         return new FlightsViewHolder(ViaPointListItemBinding.bind(view));
     }
 
@@ -37,11 +40,12 @@ public class FlightsAdapter extends RecyclerView.Adapter<FlightsAdapter.FlightsV
         return mFullPathList.size();
     }
 
+    /**
+     * Call this method to update the recycler view  data
+     *
+     * @param fullPathList New batch of data
+     */
     public void updateData(List<FullViaPath> fullPathList) {
-        if (fullPathList == null || fullPathList.isEmpty()) {
-            return;
-        }
-        mFullPathList.clear();
         mFullPathList.addAll(fullPathList);
         notifyDataSetChanged();
     }

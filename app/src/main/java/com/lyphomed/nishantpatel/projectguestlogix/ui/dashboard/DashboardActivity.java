@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 
 import com.lyphomed.nishantpatel.projectguestlogix.R;
@@ -13,6 +14,7 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Air
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.databinding.ActivityDashboardBinding;
+import com.lyphomed.nishantpatel.projectguestlogix.ui.adapter.FlightsAdapter;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.UserQuery;
 
@@ -26,6 +28,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     // Disposable object for flowable to dispose in onDestroy()
     private CompositeDisposable mCompositeDisposable;
     private ActivityDashboardBinding mBinding;
+    private FlightsAdapter mAdapter;
 
     /**
      * Call this method to get the starter intent to start {@link DashboardActivity}
@@ -54,6 +57,10 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         mCompositeDisposable = new CompositeDisposable();
         DashboardPresenter dashboardPresenter = new DashboardPresenter(DataManager.getInstance());
         dashboardPresenter.attachView(this);
+        mAdapter = new FlightsAdapter();
+        mBinding.dashboardRv.setLayoutManager(new LinearLayoutManager(this));
+        mBinding.dashboardRv.setHasFixedSize(true);
+        mBinding.dashboardRv.setAdapter(mAdapter);
 
         dashboardPresenter.findFlightConnections(origin, destination);
         dashboardPresenter.getOriginAirport(origin);
@@ -84,6 +91,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
             Log.i("Via Path", fp.getOrigin() + " to " + fp.getVia() + " in " + fp.getOriginToViaFlight() + " AND "
                     + fp.getVia() + " to " + fp.getDestination() + " in " + fp.getViaToDestination());
         }
+        mAdapter.updateData(viaPathList);
     }
 
     @Override

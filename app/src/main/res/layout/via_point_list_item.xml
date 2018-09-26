@@ -5,15 +5,16 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingTop="24dp">
 
         <ImageView
             android:id="@+id/list_item_arrival_icon_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             app:layout_constraintBottom_toBottomOf="@+id/via_list_item_destination"
-            app:layout_constraintEnd_toEndOf="@+id/list_item_arrival_icon_1"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/via_list_item_destination"
             app:srcCompat="@drawable/ic_baseline_flight_land_24px" />
 
@@ -33,48 +34,50 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:fontFamily="@font/raleway_semibold"
-            android:text="YYZ"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="YYZ" />
 
         <TextView
             android:id="@+id/via_list_item_via"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
-            android:text="BRU"
             android:textSize="20sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/via_list_item_origin"
-            app:layout_constraintEnd_toStartOf="@+id/list_item_arrival_icon_1" />
+            app:layout_constraintEnd_toStartOf="@+id/list_item_arrival_icon_1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="BRU" />
 
         <TextView
             android:id="@+id/via_list_item_via_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/raleway_semibold"
-            android:text="BRU"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="@+id/via_list_item_origin"
-            app:layout_constraintTop_toBottomOf="@+id/via_list_item_origin" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/via_list_item_origin"
+            tools:text="BRU" />
 
         <TextView
             android:id="@+id/via_list_item_destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ABD"
+            android:layout_marginEnd="24dp"
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/via_list_item_via_2"
-            tools:layout_editor_absoluteX="294dp" />
+            app:layout_constraintEnd_toStartOf="@+id/list_item_arrival_icon_2"
+            app:layout_constraintStart_toStartOf="@+id/via_list_item_via"
+            tools:text="ABD" />
 
         <ImageView
             android:id="@+id/list_item_departure_icon_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/via_list_item_via_2"
-            app:layout_constraintStart_toEndOf="@+id/via_list_item_via_2"
+            app:layout_constraintStart_toStartOf="@+id/list_item_departure_icon_1"
             app:layout_constraintTop_toTopOf="@+id/via_list_item_via_2"
             app:srcCompat="@drawable/ic_baseline_flight_takeoff_24px" />
 
@@ -88,10 +91,10 @@
             app:layout_constraintTop_toTopOf="@+id/via_list_item_via"
             app:srcCompat="@drawable/ic_baseline_flight_land_24px" />
 
-        <VideoView
+        <View
             android:id="@+id/videoView"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:background="#EDE7EC"
@@ -100,10 +103,10 @@
             app:layout_constraintStart_toEndOf="@+id/list_item_departure_icon_1"
             app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_1" />
 
-        <VideoView
+        <View
             android:id="@+id/videoView3"
             android:layout_width="0dp"
-            android:layout_height="2dp"
+            android:layout_height="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:background="#EDE7EC"
@@ -112,10 +115,10 @@
             app:layout_constraintStart_toEndOf="@+id/list_item_departure_icon_2"
             app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_2" />
 
-        <VideoView
+        <View
             android:id="@+id/videoView2"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="24dp"
             android:background="#EDE7EC"
@@ -127,30 +130,36 @@
             android:id="@+id/list_item_to_via_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/circle"
             android:fontFamily="@font/raleway_semibold"
+            android:gravity="center"
             android:padding="4dp"
-            android:text="CA"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/list_item_departure_icon_1"
-            app:layout_constraintEnd_toEndOf="@+id/videoView"
-            app:layout_constraintStart_toStartOf="@+id/videoView"
-            app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_1" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_1"
+            tools:text="CA" />
 
         <TextView
             android:id="@+id/list_item_from_via_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/circle"
             android:fontFamily="@font/raleway_semibold"
+            android:gravity="center"
             android:padding="4dp"
-            android:text="TA"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/list_item_departure_icon_2"
-            app:layout_constraintEnd_toEndOf="@+id/videoView3"
-            app:layout_constraintStart_toStartOf="@+id/videoView3"
-            app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_2" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_2"
+            tools:text="TA" />
     </android.support.constraint.ConstraintLayout>
 </layout>
