@@ -89,6 +89,7 @@
             app:srcCompat="@drawable/ic_baseline_flight_land_24px" />
 
         <VideoView
+            android:id="@+id/videoView"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginEnd="8dp"
@@ -100,6 +101,7 @@
             app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_1" />
 
         <VideoView
+            android:id="@+id/videoView3"
             android:layout_width="0dp"
             android:layout_height="2dp"
             android:layout_marginEnd="8dp"
@@ -111,6 +113,7 @@
             app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_2" />
 
         <VideoView
+            android:id="@+id/videoView2"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginEnd="8dp"
@@ -119,5 +122,35 @@
             app:layout_constraintEnd_toEndOf="@+id/list_item_arrival_icon_2"
             app:layout_constraintStart_toStartOf="@+id/via_list_item_via_2"
             app:layout_constraintTop_toBottomOf="@+id/via_list_item_destination" />
+
+        <TextView
+            android:id="@+id/list_item_to_via_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:fontFamily="@font/raleway_semibold"
+            android:padding="4dp"
+            android:text="CA"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/list_item_departure_icon_1"
+            app:layout_constraintEnd_toEndOf="@+id/videoView"
+            app:layout_constraintStart_toStartOf="@+id/videoView"
+            app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_1" />
+
+        <TextView
+            android:id="@+id/list_item_from_via_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:fontFamily="@font/raleway_semibold"
+            android:padding="4dp"
+            android:text="TA"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/list_item_departure_icon_2"
+            app:layout_constraintEnd_toEndOf="@+id/videoView3"
+            app:layout_constraintStart_toStartOf="@+id/videoView3"
+            app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_2" />
     </android.support.constraint.ConstraintLayout>
 </layout>
