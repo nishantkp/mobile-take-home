@@ -8,6 +8,8 @@ import com.lyphomed.nishantpatel.projectguestlogix.ui.model.ViaRoute;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 /**
  * Data query use case, which deals with querying data from database tables
@@ -41,9 +43,9 @@ public class DataQueryUseCase {
      * AndroidSchedulers.mainThread() to query database table on rx schedulers thread
      *
      * @param iata3 IATA3 code or airport whose information we are interested in
-     * @return Flowable list of airports
+     * @return airport
      */
-    public Flowable<Airports> provideAirportFromIata3(String iata3) {
+    public Maybe<Airports> provideAirportFromIata3(String iata3) {
         return mAirlinesDatabase.getAirlinesDao().getAirportFromIata(iata3);
     }
 

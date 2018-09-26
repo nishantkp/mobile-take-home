@@ -11,6 +11,8 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Rou
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 /**
  * Database DAO : database interaction methods
@@ -53,7 +55,7 @@ public interface AirlinesDao {
      * THis method will return airports from IATA-3 codes
      */
     @Query("SELECT * FROM airports WHERE iata_3 LIKE :iata")
-    Flowable<Airports> getAirportFromIata(String iata);
+    Maybe<Airports> getAirportFromIata(String iata);
 
     /**
      * Use this method to insert entry into "airports" table

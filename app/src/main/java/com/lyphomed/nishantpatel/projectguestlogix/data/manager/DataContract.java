@@ -9,7 +9,9 @@ import java.io.InputStream;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 interface DataContract {
     Observable<Boolean> fillAirportTable(InputStream inputStream);
@@ -20,7 +22,7 @@ interface DataContract {
 
     Flowable<List<Routes>> provideFlightDetails(String origin, String destination);
 
-    Flowable<Airports> provideAirportFromIata3(String iata3);
+    Maybe<Airports> provideAirportFromIata3(String iata3);
 
     Flowable<List<Routes>> provideAllPathsToViaLocation(String origin, String destination);
 

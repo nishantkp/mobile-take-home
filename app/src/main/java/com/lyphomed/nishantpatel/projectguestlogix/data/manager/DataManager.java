@@ -13,7 +13,9 @@ import java.io.InputStream;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  * Manager which deals with all the business logic,
@@ -79,7 +81,7 @@ public class DataManager implements DataContract {
     }
 
     @Override
-    public Flowable<Airports> provideAirportFromIata3(String iata3) {
+    public Maybe<Airports> provideAirportFromIata3(String iata3) {
         return sDataQueryUseCase.provideAirportFromIata3(iata3);
     }
 

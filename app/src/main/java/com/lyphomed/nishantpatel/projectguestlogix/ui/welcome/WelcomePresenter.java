@@ -1,8 +1,11 @@
 package com.lyphomed.nishantpatel.projectguestlogix.ui.welcome;
 
-import android.text.TextUtils;
-
 import com.lyphomed.nishantpatel.projectguestlogix.base.BasePresenter;
+import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Presenter which validates user query and set callbacks for error or for
@@ -11,7 +14,10 @@ import com.lyphomed.nishantpatel.projectguestlogix.base.BasePresenter;
 public class WelcomePresenter extends BasePresenter<WelcomeContract.View>
         implements WelcomeContract.Presenter {
 
-    WelcomePresenter() {
+    private DataManager mDataManager;
+
+    WelcomePresenter(DataManager dataManager) {
+        mDataManager = dataManager;
     }
 
     @Override
@@ -26,12 +32,30 @@ public class WelcomePresenter extends BasePresenter<WelcomeContract.View>
 
     @Override
     public void onUserQuerySubmit(String origin, String destination) {
-        // If user hit search without entering anything or if code is not valid
-        // throw an error
-        if (origin.length() < 3 && destination.length() < 3) {
-            getView().onError("Please provide valid code");
-            return;
-        }
-        getView().onQuerySubmit(origin, destination);
+        Disposable disposable = mDataManager.provideAirportFromIata3(origin)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnEvent((airport, error) -> {
+                    if (airport == null && error == null) {
+                        getView().onOriginCodeError();
+                        getView().onError("Provide valid origin code!");
+                    } else {
+                        getView().onOriginCodeCorrect();
+                        mDataManager.provideAirportFromIata3(destination)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .doOnEvent((a, e) -> {
+                                    if (a == null && e == null) {
+                                        getView().onDestinationCodeError();
+                                        getView().onError("Provide valid destination code!");
+                                    } else {
+                                        getView().onDestinationCodeCorrect();
+                                        getView().onQuerySubmit(origin, destination);
+                                    }
+                                }).subscribe();
+                    }
+                })
+                .subscribe();
+        getView().onDisposables(disposable);
     }
 }
