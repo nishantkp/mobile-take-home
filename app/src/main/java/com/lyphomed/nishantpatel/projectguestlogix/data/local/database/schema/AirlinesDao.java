@@ -43,6 +43,13 @@ public interface AirlinesDao {
     Flowable<List<Routes>> getDirectRoutes(String userOrigin, String userDestination);
 
     /**
+     * This method will return list all possible paths from origin to via point
+     * From that we can easily extract information on "via" location
+     */
+    @Query("SELECT * FROM routes WHERE origin LIKE :userOrigin AND destination IN (SELECT origin FROM routes WHERE destination LIKE :userDestination) LIMIT 5")
+    Flowable<List<Routes>> getPossiblePathsToViaLocation(String userOrigin, String userDestination);
+
+    /**
      * THis method will return airports from IATA-3 codes
      */
     @Query("SELECT * FROM airports WHERE iata_3 LIKE :iata")

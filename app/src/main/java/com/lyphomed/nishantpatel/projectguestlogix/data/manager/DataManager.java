@@ -7,6 +7,7 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.Ai
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataAvailabilityUseCase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataInsertionUseCase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataQueryUseCase;
+import com.lyphomed.nishantpatel.projectguestlogix.ui.model.ViaRoute;
 
 import java.io.InputStream;
 import java.util.List;
@@ -80,5 +81,15 @@ public class DataManager implements DataContract {
     @Override
     public Flowable<List<Airports>> provideAirportFromIata3(String iata3) {
         return sDataQueryUseCase.provideAirportFromIata3(iata3);
+    }
+
+    @Override
+    public Flowable<List<Routes>> provideAllPathsToViaLocation(String origin, String destination) {
+        return sDataQueryUseCase.provideAllPathsToViaLocation(origin, destination);
+    }
+
+    @Override
+    public Flowable<ViaRoute> provideFullPathWithViaLocation(String origin, String destination) {
+        return sDataQueryUseCase.provideFullPathsWithViaDestination(origin, destination);
     }
 }

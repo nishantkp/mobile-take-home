@@ -3,6 +3,7 @@ package com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airports;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.AirlinesDatabase;
+import com.lyphomed.nishantpatel.projectguestlogix.ui.model.ViaRoute;
 
 import java.util.List;
 
@@ -44,5 +45,42 @@ public class DataQueryUseCase {
      */
     public Flowable<List<Airports>> provideAirportFromIata3(String iata3) {
         return mAirlinesDatabase.getAirliesDao().getAirportsFromIata(iata3);
+    }
+
+
+    /**
+     * This method will provide list of all the possible paths to "via" location
+     * <p>
+     * NOTE: Don't forget to subscribe flowable on Schedules.io() and observe on
+     * AndroidSchedulers.mainThread() to query database table on rx schedulers thread
+     *
+     * @param origin      IATA3 code for origin
+     * @param destination IATA3 code for destination
+     * @return Flowable list of {@link Routes}
+     */
+    public Flowable<List<Routes>> provideAllPathsToViaLocation(String origin, String destination) {
+        return mAirlinesDatabase.getAirliesDao().getPossiblePathsToViaLocation(origin, destination);
+    }
+
+    /**
+     * Call this method to get the all the possible routes with "Via" destination
+     * <p>
+     * Below method first finds the all possible routes from origin to "via" location
+     * Then it uses flatMapIterable to loop through each route finds the "via" location to
+     * <p>
+     * NOTE: Don't forget to subscribe flowable on Schedules.io() and observe on
+     * AndroidSchedulers.mainThread() to query database table on rx schedulers thread
+     *
+     * @param origin      IATA3 code for origin
+     * @param destination IATA3 code for destination
+     * @return Flowable {@link ViaRoute} object
+     */
+    public Flowable<ViaRoute> provideFullPathsWithViaDestination(String origin, String destination) {
+        return provideAllPathsToViaLocation(origin, destination)
+                .flatMapIterable(routesList -> routesList)
+                .flatMap(routes -> Flowable.zip(
+                        provideFlightDetails(origin, routes.getDestination()),
+                        provideFlightDetails(routes.getDestination(), destination),
+                        ViaRoute::new));
     }
 }
