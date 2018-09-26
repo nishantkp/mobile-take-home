@@ -43,8 +43,8 @@ public class DataQueryUseCase {
      * @param iata3 IATA3 code or airport whose information we are interested in
      * @return Flowable list of airports
      */
-    public Flowable<List<Airports>> provideAirportFromIata3(String iata3) {
-        return mAirlinesDatabase.getAirlinesDao().getAirportsFromIata(iata3);
+    public Flowable<Airports> provideAirportFromIata3(String iata3) {
+        return mAirlinesDatabase.getAirlinesDao().getAirportFromIata(iata3);
     }
 
 

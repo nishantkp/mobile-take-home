@@ -53,7 +53,7 @@ public interface AirlinesDao {
      * THis method will return airports from IATA-3 codes
      */
     @Query("SELECT * FROM airports WHERE iata_3 LIKE :iata")
-    Flowable<List<Airports>> getAirportsFromIata(String iata);
+    Flowable<Airports> getAirportFromIata(String iata);
 
     /**
      * Use this method to insert entry into "airports" table

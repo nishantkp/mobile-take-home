@@ -12,6 +12,14 @@ public class UserQuery extends BaseObservable {
     private String mOrigin;
     private String mDestination;
 
+    public UserQuery(String origin, String destination) {
+        mOrigin = origin;
+        mDestination = destination;
+    }
+
+    public UserQuery() {
+    }
+
     @Bindable
     public String getOrigin() {
         return mOrigin;

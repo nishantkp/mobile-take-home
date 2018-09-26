@@ -79,7 +79,7 @@ public class DataManager implements DataContract {
     }
 
     @Override
-    public Flowable<List<Airports>> provideAirportFromIata3(String iata3) {
+    public Flowable<Airports> provideAirportFromIata3(String iata3) {
         return sDataQueryUseCase.provideAirportFromIata3(iata3);
     }
 

@@ -91,4 +91,24 @@ public class DashboardPresenter
                         });
         getView().onDisposable(disposable);
     }
+
+    @Override
+    public void getDestinationAirport(String iata3) {
+        Disposable disposable =
+                mDataManager.provideAirportFromIata3(iata3)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(airport -> getView().onDestinationAirportDetail(airport));
+        getView().onDisposable(disposable);
+    }
+
+    @Override
+    public void getOriginAirport(String iata3) {
+        Disposable disposable =
+                mDataManager.provideAirportFromIata3(iata3)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(airport -> getView().onOriginAirportDetail(airport));
+        getView().onDisposable(disposable);
+    }
 }

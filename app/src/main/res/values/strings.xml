@@ -4,4 +4,6 @@
     <string name="destination_hint_label">Destination</string>
     <string name="search_flights_button_label">Search Flights</string>
     <string name="welcome_label">Welcome!</string>
+    <string name="dashboard_arrival_label">Arrival</string>
+    <string name="dashboard_departure_label">Departure</string>
 </resources>

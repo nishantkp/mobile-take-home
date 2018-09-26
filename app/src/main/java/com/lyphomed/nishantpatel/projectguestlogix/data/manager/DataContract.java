@@ -20,7 +20,7 @@ interface DataContract {
 
     Flowable<List<Routes>> provideFlightDetails(String origin, String destination);
 
-    Flowable<List<Airports>> provideAirportFromIata3(String iata3);
+    Flowable<Airports> provideAirportFromIata3(String iata3);
 
     Flowable<List<Routes>> provideAllPathsToViaLocation(String origin, String destination);
 
