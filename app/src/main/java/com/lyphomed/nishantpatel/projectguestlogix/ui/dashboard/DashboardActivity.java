@@ -1,5 +1,7 @@
 package com.lyphomed.nishantpatel.projectguestlogix.ui.dashboard;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,16 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
 
     // Disposable object for flowable to dispose in onDestroy()
     private CompositeDisposable mCompositeDisposable;
+
+    /**
+     * Call this method to get the starter intent to start {@link DashboardActivity}
+     *
+     * @param context context of activity from which intent is originated
+     * @return starter intent
+     */
+    public static Intent getStarterIntent(Context context) {
+        return new Intent(context, DashboardActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

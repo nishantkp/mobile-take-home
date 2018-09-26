@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProjectGuestLogix</string>
+    <string name="origin_hint_label">Origin</string>
+    <string name="destination_hint_label">Destination</string>
+    <string name="search_flights_button_label">Search Flights</string>
+    <string name="welcome_label">Welcome!</string>
 </resources>

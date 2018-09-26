@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.lyphomed.nishantpatel.projectguestlogix.ui.model.UserQuery" />
+
+        <variable
+            name="presenter"
+            type="com.lyphomed.nishantpatel.projectguestlogix.ui.welcome.WelcomePresenter" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/welcome_heading"
+            style="@style/WelcomeHeaderStyle"
+            android:text="@string/welcome_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/welcome_origin_code"
+            style="@style/WelcomeEditTextStyle"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:hint="@string/origin_hint_label"
+            android:text="@={user.origin}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/welcome_destination_code"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="YYZ" />
+
+        <EditText
+            android:id="@+id/welcome_destination_code"
+            style="@style/WelcomeEditTextStyle"
+            android:fontFamily="@font/raleway_semibold"
+            android:hint="@string/destination_hint_label"
+            android:text="@={user.destination}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/welcome_origin_code"
+            app:layout_constraintTop_toTopOf="@+id/welcome_origin_code"
+            tools:text="BUL" />
+
+        <Button
+            android:id="@+id/welcome_search_button"
+            style="@style/WelcomeButtonStyle"
+            android:onClick="@{()->presenter.onUserQuerySubmit(user.origin, user.destination)}"
+            android:text="@string/search_flights_button_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_origin_code" />
+    </android.support.constraint.ConstraintLayout>
+</layout>
