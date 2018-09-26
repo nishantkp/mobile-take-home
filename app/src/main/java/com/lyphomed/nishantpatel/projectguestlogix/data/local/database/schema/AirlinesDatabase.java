@@ -23,9 +23,13 @@ public abstract class AirlinesDatabase extends RoomDatabase {
 
     public static AirlinesDatabase getInstance(Context context) {
         if (sAirlinesDatabase == null) {
-            sAirlinesDatabase =
-                    Room.databaseBuilder(context.getApplicationContext(), AirlinesDatabase.class, AppConfig.DATABASE_NAME)
-                            .build();
+            synchronized (AirlinesDatabase.class) {
+                if (sAirlinesDatabase == null) {
+                    sAirlinesDatabase =
+                            Room.databaseBuilder(context.getApplicationContext(), AirlinesDatabase.class, AppConfig.DATABASE_NAME)
+                                    .build();
+                }
+            }
         }
         return sAirlinesDatabase;
     }
