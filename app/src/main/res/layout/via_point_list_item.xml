@@ -5,16 +5,15 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingTop="24dp">
 
         <ImageView
             android:id="@+id/list_item_arrival_icon_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/via_list_item_destination"
-            app:layout_constraintEnd_toStartOf="@+id/via_list_item_destination"
+            app:layout_constraintEnd_toEndOf="@+id/list_item_arrival_icon_1"
             app:layout_constraintTop_toTopOf="@+id/via_list_item_destination"
             app:srcCompat="@drawable/ic_baseline_flight_land_24px" />
 
@@ -43,11 +42,11 @@
             android:id="@+id/via_list_item_via"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="24dp"
             android:text="BRU"
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/via_list_item_origin"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/list_item_arrival_icon_1" />
 
         <TextView
             android:id="@+id/via_list_item_via_2"
@@ -67,7 +66,7 @@
             android:text="ABD"
             android:textSize="20sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/via_list_item_via_2"
-            app:layout_constraintEnd_toEndOf="@+id/via_list_item_via" />
+            tools:layout_editor_absoluteX="294dp" />
 
         <ImageView
             android:id="@+id/list_item_departure_icon_2"
@@ -83,10 +82,9 @@
             android:id="@+id/list_item_arrival_icon_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
             app:layout_constraintBottom_toBottomOf="@+id/via_list_item_via"
-            app:layout_constraintEnd_toStartOf="@+id/via_list_item_via"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/via_list_item_via"
             app:srcCompat="@drawable/ic_baseline_flight_land_24px" />
 
@@ -97,7 +95,7 @@
             android:layout_marginStart="8dp"
             android:background="#EDE7EC"
             app:layout_constraintBottom_toBottomOf="@+id/list_item_departure_icon_1"
-            app:layout_constraintEnd_toStartOf="@+id/list_item_arrival_icon_1"
+            app:layout_constraintEnd_toStartOf="@+id/via_list_item_via"
             app:layout_constraintStart_toEndOf="@+id/list_item_departure_icon_1"
             app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_1" />
 
@@ -108,7 +106,7 @@
             android:layout_marginStart="8dp"
             android:background="#EDE7EC"
             app:layout_constraintBottom_toBottomOf="@+id/list_item_departure_icon_2"
-            app:layout_constraintEnd_toStartOf="@+id/list_item_arrival_icon_2"
+            app:layout_constraintEnd_toStartOf="@+id/via_list_item_destination"
             app:layout_constraintStart_toEndOf="@+id/list_item_departure_icon_2"
             app:layout_constraintTop_toTopOf="@+id/list_item_departure_icon_2" />
 
@@ -118,7 +116,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginTop="24dp"
             android:background="#EDE7EC"
-            app:layout_constraintEnd_toEndOf="@+id/via_list_item_destination"
+            app:layout_constraintEnd_toEndOf="@+id/list_item_arrival_icon_2"
             app:layout_constraintStart_toStartOf="@+id/via_list_item_via_2"
             app:layout_constraintTop_toBottomOf="@+id/via_list_item_destination" />
     </android.support.constraint.ConstraintLayout>
