@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.lyphomed.nishantpatel.projectguestlogix.R;
+import com.lyphomed.nishantpatel.projectguestlogix.config.PublicKeys;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
@@ -35,11 +36,19 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        String origin = "";
+        String destination = "";
+
+        // Get the data from Intent
+        if (getIntent() != null) {
+            origin = getIntent().getStringExtra(PublicKeys.USER_ORIGIN);
+            destination = getIntent().getStringExtra(PublicKeys.USER_DESTINATION);
+        }
         mCompositeDisposable = new CompositeDisposable();
         DashboardPresenter dashboardPresenter = new DashboardPresenter(DataManager.getInstance());
         dashboardPresenter.attachView(this);
 
-        dashboardPresenter.findFlightConnections("ABJ", "YYZ");
+        dashboardPresenter.findFlightConnections(origin, destination);
     }
 
     @Override
