@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
 
 import com.lyphomed.nishantpatel.projectguestlogix.R;
 import com.lyphomed.nishantpatel.projectguestlogix.config.PublicKeys;
@@ -83,23 +84,19 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onDirectPath(List<Routes> directPathList) {
-        for (Routes r : directPathList) {
-            Log.i("Direct Path", r.getAirlineCode() + " " + r.getOrigin() + r.getDestination());
-        }
+        mBinding.dashboardEmptyText.setVisibility(View.GONE);
         mAdapter.updateDirectPath(directPathList, PublicKeys.DIRECT_PATH_LIST_ITEM);
     }
 
     @Override
     public void onViaPaths(List<FullViaPath> viaPathList) {
-        for (FullViaPath fp : viaPathList) {
-            Log.i("Via Path", fp.getOrigin() + " to " + fp.getVia() + " in " + fp.getOriginToViaFlight() + " AND "
-                    + fp.getVia() + " to " + fp.getDestination() + " in " + fp.getViaToDestinationFlight());
-        }
+        mBinding.dashboardEmptyText.setVisibility(View.GONE);
         mAdapter.updateFullPath(viaPathList, PublicKeys.VIA_PATH_LIST_ITEM);
     }
 
     @Override
     public void noPathsFound(String message) {
+        mBinding.dashboardEmptyText.setVisibility(View.VISIBLE);
         Log.i("No Paths", message);
     }
 
