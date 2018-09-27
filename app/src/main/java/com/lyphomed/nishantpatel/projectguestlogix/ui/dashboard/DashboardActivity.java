@@ -115,13 +115,11 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(FullViaPath fullViaPath) {
-        startActivity(new Intent(this, MapsActivity.class));
-        // startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_VIA_PATH, fullViaPath));
+        startActivity(MapsActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_VIA_PATH, fullViaPath));
     }
 
     @Override
     public void onItemClick(Routes routes) {
-        startActivity(new Intent(this, MapsActivity.class));
-        //startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_DIRECT_PATH, routes));
+        startActivity(MapsActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_DIRECT_PATH, routes));
     }
 }
