@@ -32,6 +32,11 @@ public class WelcomePresenter extends BasePresenter<WelcomeContract.View>
 
     @Override
     public void onUserQuerySubmit(String origin, String destination) {
+        // When user enters origin and destination code same, throw an error
+        if (origin.equals(destination)) {
+            getView().onError("Origin and destination should not be same!");
+            return;
+        }
         Disposable disposable = mDataManager.provideAirportFromIata3(origin)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

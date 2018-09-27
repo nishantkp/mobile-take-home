@@ -68,6 +68,11 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContrac
 
     @Override
     public void onError(String message) {
+        mBinding.welcomeErrorText.setVisibility(View.VISIBLE);
+        mBinding.welcomeDestinationAlert.setVisibility(View.VISIBLE);
+        mBinding.welcomeOriginAlert.setVisibility(View.VISIBLE);
+        mBinding.welcomeDestinationCode.setBackground(getDrawable(R.drawable.error_border));
+        mBinding.welcomeOriginCode.setBackground(getDrawable(R.drawable.error_border));
         Log.i(LOG_TAG, message);
     }
 
