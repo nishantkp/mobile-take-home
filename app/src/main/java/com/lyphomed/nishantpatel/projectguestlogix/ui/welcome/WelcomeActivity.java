@@ -1,5 +1,7 @@
 package com.lyphomed.nishantpatel.projectguestlogix.ui.welcome;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,16 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContrac
     private static final String LOG_TAG = WelcomeActivity.class.getSimpleName();
     private CompositeDisposable mCompositeDisposable;
     private ActivityWelcomeBinding mBinding;
+
+    /**
+     * Call this method to get the starter intent to start {@link WelcomeActivity}
+     *
+     * @param context context of activity from which intent is originated
+     * @return starter intent
+     */
+    public static Intent getStarterIntent(Context context) {
+        return new Intent(context, WelcomeActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,13 +18,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.welcome.WelcomeActivity">
+        <activity android:name=".ui.splashscreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.welcome.WelcomeActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -39,9 +41,9 @@
         <activity
             android:name=".ui.maps.MapsActivity"
             android:label="@string/title_activity_maps" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-
     </application>
 </manifest>

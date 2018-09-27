@@ -10,4 +10,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="welcome_error_message">Enter valid code!</string>
     <string name="dashboard_empty_text">Opps!   No flights available!</string>
+    <string name="logo_part_1">easy</string>
+    <string name="logo_part_2">PATH</string>
 </resources>
