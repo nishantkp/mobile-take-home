@@ -23,6 +23,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".ui.dashboard.DashboardActivity" />
+        <activity android:name=".ui.maps.MapActivity"></activity>
     </application>
 
 </manifest>
