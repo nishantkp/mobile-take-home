@@ -10,14 +10,14 @@ public class FullViaPath {
     private String mVia;
     private String mDestination;
     private String mOriginToViaFlight;
-    private String mViaToDestination;
+    private String mViaToDestinationFlight;
 
-    public FullViaPath(String origin, String via, String destination, String originToViaFlight, String viaToDestination) {
+    public FullViaPath(String origin, String via, String destination, String originToViaFlight, String viaToDestinationFlight) {
         this.mOrigin = origin;
         this.mVia = via;
         this.mDestination = destination;
         this.mOriginToViaFlight = originToViaFlight;
-        this.mViaToDestination = viaToDestination;
+        this.mViaToDestinationFlight = viaToDestinationFlight;
     }
 
     public String getOrigin() {
@@ -52,11 +52,11 @@ public class FullViaPath {
         this.mOriginToViaFlight = originToViaFlight;
     }
 
-    public String getViaToDestination() {
-        return mViaToDestination;
+    public String getViaToDestinationFlight() {
+        return mViaToDestinationFlight;
     }
 
     public void setViaToDestination(String viaToDestination) {
-        this.mViaToDestination = viaToDestination;
+        this.mViaToDestinationFlight = viaToDestination;
     }
 }

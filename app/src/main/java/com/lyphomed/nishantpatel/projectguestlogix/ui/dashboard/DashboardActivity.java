@@ -83,15 +83,16 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         for (Routes r : directPathList) {
             Log.i("Direct Path", r.getAirlineCode() + " " + r.getOrigin() + r.getDestination());
         }
+        mAdapter.updateDirectPath(directPathList, PublicKeys.DIRECT_PATH_LIST_ITEM);
     }
 
     @Override
     public void onViaPaths(List<FullViaPath> viaPathList) {
         for (FullViaPath fp : viaPathList) {
             Log.i("Via Path", fp.getOrigin() + " to " + fp.getVia() + " in " + fp.getOriginToViaFlight() + " AND "
-                    + fp.getVia() + " to " + fp.getDestination() + " in " + fp.getViaToDestination());
+                    + fp.getVia() + " to " + fp.getDestination() + " in " + fp.getViaToDestinationFlight());
         }
-        mAdapter.updateData(viaPathList);
+        mAdapter.updateFullPath(viaPathList, PublicKeys.VIA_PATH_LIST_ITEM);
     }
 
     @Override
@@ -107,6 +108,5 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     @Override
     public void onDestinationAirportDetail(Airports airports) {
         mBinding.dashboardHeader.dashboardDestinationName.setText(airports.getAirportName());
-
     }
 }

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="directRoute"
+            type="com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes" />
+    </data>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:fontFamily="@font/raleway_semibold"
+            android:text="@{directRoute.origin}"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -45,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/raleway_semibold"
+            android:text="@{directRoute.destination}"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/direct_path_list_item_arrival_icon_2"
             app:layout_constraintTop_toTopOf="parent"
@@ -63,13 +72,14 @@
             app:layout_constraintTop_toTopOf="@+id/direct_path_list_item_departure_icon_1" />
 
         <TextView
-            android:id="@+id/direct_path_ist_item_flight_code"
+            android:id="@+id/direct_path_list_item_flight_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/circle"
             android:fontFamily="@font/raleway_semibold"
             android:gravity="center"
             android:padding="4dp"
+            android:text="@{directRoute.airlineCode}"
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/direct_path_list_item_departure_icon_1"
@@ -89,7 +99,5 @@
             app:layout_constraintEnd_toEndOf="@+id/direct_path_list_item_arrival_icon_2"
             app:layout_constraintStart_toStartOf="@+id/direct_path_list_item_origin"
             app:layout_constraintTop_toBottomOf="@+id/direct_path_list_item_destination" />
-
-
     </android.support.constraint.ConstraintLayout>
 </layout>
