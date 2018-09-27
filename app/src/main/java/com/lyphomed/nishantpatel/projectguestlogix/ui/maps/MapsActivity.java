@@ -138,7 +138,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Polyline line = mMap.addPolyline(new PolylineOptions()
                 .add(new LatLng(startLat, startLng), new LatLng(endLat, endLng))
                 .width(5)
-                .color(getColor(R.color.colorAccent)));
+                .color(getResources().getColor(R.color.colorAccent)));
         line.setVisible(true);
     }
 }
