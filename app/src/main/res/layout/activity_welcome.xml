@@ -79,5 +79,19 @@
             app:layout_constraintEnd_toEndOf="@+id/welcome_destination_code"
             app:layout_constraintTop_toTopOf="@+id/welcome_destination_code"
             app:srcCompat="@drawable/ic_baseline_info_24px" />
+
+        <TextView
+            android:id="@+id/welcome_error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/raleway_medium"
+            android:text="@string/welcome_error_message"
+            android:textColor="#EE9B43"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_origin_code" />
     </android.support.constraint.ConstraintLayout>
 </layout>

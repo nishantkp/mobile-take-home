@@ -61,24 +61,28 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContrac
 
     @Override
     public void onDestinationCodeError() {
+        mBinding.welcomeErrorText.setVisibility(View.VISIBLE);
         mBinding.welcomeDestinationAlert.setVisibility(View.VISIBLE);
         mBinding.welcomeDestinationCode.setBackground(getDrawable(R.drawable.error_border));
     }
 
     @Override
     public void onDestinationCodeCorrect() {
+        mBinding.welcomeErrorText.setVisibility(View.INVISIBLE);
         mBinding.welcomeDestinationAlert.setVisibility(View.GONE);
         mBinding.welcomeDestinationCode.setBackground(getDrawable(R.drawable.border));
     }
 
     @Override
     public void onOriginCodeError() {
+        mBinding.welcomeErrorText.setVisibility(View.VISIBLE);
         mBinding.welcomeOriginAlert.setVisibility(View.VISIBLE);
         mBinding.welcomeOriginCode.setBackground(getDrawable(R.drawable.error_border));
     }
 
     @Override
     public void onOriginCodeCorrect() {
+        mBinding.welcomeErrorText.setVisibility(View.INVISIBLE);
         mBinding.welcomeOriginAlert.setVisibility(View.GONE);
         mBinding.welcomeOriginCode.setBackground(getDrawable(R.drawable.border));
     }
