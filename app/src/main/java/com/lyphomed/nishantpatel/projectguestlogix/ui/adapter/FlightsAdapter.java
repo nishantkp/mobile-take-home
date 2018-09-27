@@ -10,7 +10,7 @@ import com.lyphomed.nishantpatel.projectguestlogix.R;
 import com.lyphomed.nishantpatel.projectguestlogix.config.PublicKeys;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.databinding.DirectFlightListItemBinding;
-import com.lyphomed.nishantpatel.projectguestlogix.databinding.ViaPointListItemBinding;
+import com.lyphomed.nishantpatel.projectguestlogix.databinding.ViaPathListItemBinding;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
 
 import java.util.ArrayList;
@@ -37,8 +37,8 @@ public class FlightsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.direct_flight_list_item, viewGroup, false);
                 return new DirectPathViewHolder(DirectFlightListItemBinding.bind(view));
             case PublicKeys.VIA_PATH_LIST_ITEM:
-                View view2 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.via_point_list_item, viewGroup, false);
-                return new ViaPathViewHolder(ViaPointListItemBinding.bind(view2));
+                View view2 = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.via_path_list_item, viewGroup, false);
+                return new ViaPathViewHolder(ViaPathListItemBinding.bind(view2));
             default:
                 return super.createViewHolder(viewGroup, viewType);
         }
@@ -98,9 +98,9 @@ public class FlightsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
      */
     class ViaPathViewHolder extends RecyclerView.ViewHolder {
 
-        private ViaPointListItemBinding mBinding;
+        private ViaPathListItemBinding mBinding;
 
-        ViaPathViewHolder(@NonNull ViaPointListItemBinding binding) {
+        ViaPathViewHolder(@NonNull ViaPathListItemBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
