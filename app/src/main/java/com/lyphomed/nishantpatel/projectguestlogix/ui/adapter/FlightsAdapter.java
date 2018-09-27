@@ -23,10 +23,22 @@ public class FlightsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<FullViaPath> mFullPathList;
     private List<Routes> mDirectRoutesList;
     private int mDirectPath;
+    private OnViaPathItemClick mOnViaPathItemClick;
+    private OnDirectPathItemClick mOnDirectPathItemClick;
 
-    public FlightsAdapter() {
+    public interface OnViaPathItemClick {
+        void onItemClick(FullViaPath fullViaPath);
+    }
+
+    public interface OnDirectPathItemClick {
+        void onItemClick(Routes routes);
+    }
+
+    public FlightsAdapter(OnDirectPathItemClick onDirectPathItemClick, OnViaPathItemClick onViaPathItemClick) {
         mFullPathList = new ArrayList<>();
         mDirectRoutesList = new ArrayList<>();
+        mOnDirectPathItemClick = onDirectPathItemClick;
+        mOnViaPathItemClick = onViaPathItemClick;
     }
 
     @NonNull
@@ -55,6 +67,7 @@ public class FlightsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             case 1:
                 ViaPathViewHolder viaPathViewHolder = (ViaPathViewHolder) viewHolder;
                 viaPathViewHolder.bind(mFullPathList.get(i));
+                break;
         }
     }
 
@@ -96,34 +109,46 @@ public class FlightsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     /**
      * View holder for displaying Via paths
      */
-    class ViaPathViewHolder extends RecyclerView.ViewHolder {
+    class ViaPathViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ViaPathListItemBinding mBinding;
 
         ViaPathViewHolder(@NonNull ViaPathListItemBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
+            mBinding.getRoot().setOnClickListener(this);
         }
 
         void bind(FullViaPath fullViaPath) {
             mBinding.setViaPath(fullViaPath);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnViaPathItemClick.onItemClick(mFullPathList.get(getAdapterPosition()));
         }
     }
 
     /**
      * View Holder for displaying direct flights
      */
-    class DirectPathViewHolder extends RecyclerView.ViewHolder {
+    class DirectPathViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private DirectFlightListItemBinding mBinding;
 
         DirectPathViewHolder(@NonNull DirectFlightListItemBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
+            mBinding.getRoot().setOnClickListener(this);
         }
 
         void bind(Routes routes) {
             mBinding.setDirectRoute(routes);
+        }
+
+        @Override
+        public void onClick(View v) {
+            mOnDirectPathItemClick.onItemClick(mDirectRoutesList.get(getAdapterPosition()));
         }
     }
 }

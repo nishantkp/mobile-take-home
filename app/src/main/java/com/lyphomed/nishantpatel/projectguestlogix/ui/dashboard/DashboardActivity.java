@@ -15,15 +15,19 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Rou
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.databinding.ActivityDashboardBinding;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.adapter.FlightsAdapter;
+import com.lyphomed.nishantpatel.projectguestlogix.ui.maps.MapActivity;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.UserQuery;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class DashboardActivity extends AppCompatActivity implements DashboardContract.View {
+public class DashboardActivity extends AppCompatActivity
+        implements DashboardContract.View, FlightsAdapter.OnDirectPathItemClick,
+        FlightsAdapter.OnViaPathItemClick {
 
     // Disposable object for flowable to dispose in onDestroy()
     private CompositeDisposable mCompositeDisposable;
@@ -57,7 +61,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
         mCompositeDisposable = new CompositeDisposable();
         DashboardPresenter dashboardPresenter = new DashboardPresenter(DataManager.getInstance());
         dashboardPresenter.attachView(this);
-        mAdapter = new FlightsAdapter();
+        mAdapter = new FlightsAdapter(this, this);
         mBinding.dashboardRv.setLayoutManager(new LinearLayoutManager(this));
         mBinding.dashboardRv.setHasFixedSize(true);
         mBinding.dashboardRv.setAdapter(mAdapter);
@@ -108,5 +112,15 @@ public class DashboardActivity extends AppCompatActivity implements DashboardCon
     @Override
     public void onDestinationAirportDetail(Airports airports) {
         mBinding.dashboardHeader.dashboardDestinationName.setText(airports.getAirportName());
+    }
+
+    @Override
+    public void onItemClick(FullViaPath fullViaPath) {
+        startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_VIA_PATH, fullViaPath));
+    }
+
+    @Override
+    public void onItemClick(Routes routes) {
+        startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_DIRECT_PATH, routes));
     }
 }

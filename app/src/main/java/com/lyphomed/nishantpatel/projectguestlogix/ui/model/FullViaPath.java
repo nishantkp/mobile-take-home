@@ -1,11 +1,13 @@
 package com.lyphomed.nishantpatel.projectguestlogix.ui.model;
 
+import java.io.Serializable;
+
 /**
  * POJO for path between origin-via-destination
  * It also has flight information like flight code for origin to "via" and
  * "via" to destination
  */
-public class FullViaPath {
+public class FullViaPath implements Serializable {
     private String mOrigin;
     private String mVia;
     private String mDestination;
