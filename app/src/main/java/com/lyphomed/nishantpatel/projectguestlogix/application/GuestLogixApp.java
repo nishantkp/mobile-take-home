@@ -34,62 +34,6 @@ public class GuestLogixApp extends Application {
             @Override
             public void onTaskComplete() {
                 // This means we have data present in the database, so no need to perform insertion
-//                dataManager.provideFlightDetails("ABJ", "BRU").subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(data -> {
-//                            for (Routes r : data) {
-//                                Log.i("Data", r.getAirlineCode() + " " + r.getOrigin() + " " + r.getDestination());
-//                            }
-//                        });
-
-//                dataManager.provideAirportFromIata3("ABJ").subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(data -> {
-//                            for (Airports a : data) {
-//                                Log.i("data", a.getAirportCode() + " " + a.getAirportName() + " " + a.getCity() + " " + a.getCountry() + " " + a.getLatitude() + " " + a.getLongitude());
-//                            }
-//                        });
-
-//                dataManager.provideAllPathsToViaLocation("BNA", "YUL")
-//                        .flatMapIterable(ds -> ds)
-//                        .flatMap(d -> Flowable.zip(
-//                                dataManager.provideFlightDetails("BNA", d.getDestination()),
-//                                dataManager.provideFlightDetails(d.getDestination(), "YUL"),
-//                                (t1, t2) -> new ViaRoute(t1, t2)))
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(a -> {
-//                            List<Routes> firstRoutes = a.getfirstRoute();
-//                            List<Routes> secondRoutes = a.getSecondRoute();
-//                            for (Routes routes1 : firstRoutes) {
-//                                for (Routes routes2 : secondRoutes) {
-//                                    Log.i("POSSIBLE ROUTES", routes1.getAirlineCode() + routes1.getOrigin() + routes1.getDestination() + " AND " +
-//                                            routes2.getAirlineCode() + routes2.getOrigin() + routes2.getDestination());
-//                                }
-//                            }
-//                        });
-
-//                dataManager.provideFullPathWithViaLocation("BNA", "YUL")
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(a -> {
-//                            List<Routes> firstRoutes = a.getfirstRoute();
-//                            List<Routes> secondRoutes = a.getSecondRoute();
-//                            for (Routes routes1 : firstRoutes) {
-//                                for (Routes routes2 : secondRoutes) {
-//                                    Log.i("POSSIBLE ROUTES", routes1.getAirlineCode() + routes1.getOrigin() + routes1.getDestination() + " AND " +
-//                                            routes2.getAirlineCode() + routes2.getOrigin() + routes2.getDestination());
-//                                }
-//                            }
-//                        });
-//                Log.i("Total path is ", "IST to " + r.getDestination() + " in " + r.getAirlineCode() + " to AZS");)
-//                        .subscribeOn(Schedulers.io())
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribe(data -> {
-//                            for (Routes r : data) {
-//
-//                            }
-//                        });
             }
 
             @Override
