@@ -7,4 +7,5 @@
     <string name="dashboard_arrival_label">Arrival</string>
     <string name="dashboard_departure_label">Departure</string>
     <string name="your_flights_dashboard_label">Your flights,</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

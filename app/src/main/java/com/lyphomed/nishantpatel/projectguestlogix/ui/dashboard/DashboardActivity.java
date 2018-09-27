@@ -15,12 +15,11 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Rou
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.databinding.ActivityDashboardBinding;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.adapter.FlightsAdapter;
-import com.lyphomed.nishantpatel.projectguestlogix.ui.maps.MapActivity;
+import com.lyphomed.nishantpatel.projectguestlogix.ui.maps.MapsActivity;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.UserQuery;
 
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -116,11 +115,13 @@ public class DashboardActivity extends AppCompatActivity
 
     @Override
     public void onItemClick(FullViaPath fullViaPath) {
-        startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_VIA_PATH, fullViaPath));
+        startActivity(new Intent(this, MapsActivity.class));
+        // startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_VIA_PATH, fullViaPath));
     }
 
     @Override
     public void onItemClick(Routes routes) {
-        startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_DIRECT_PATH, routes));
+        startActivity(new Intent(this, MapsActivity.class));
+        //startActivity(MapActivity.getStarterIntent(this).putExtra(PublicKeys.KEY_DIRECT_PATH, routes));
     }
 }
