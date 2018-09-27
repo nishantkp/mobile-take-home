@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/splash_screen_tv_2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/raleway_semibold"
         android:text="@string/logo_part_2"
@@ -36,4 +36,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/splash_screen_tv_1" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:indeterminate="true"
+        android:indeterminateTint="#EE9B43"
+        app:layout_constraintBottom_toTopOf="@+id/splash_screen_tv_2"
+        app:layout_constraintEnd_toEndOf="@+id/splash_screen_tv_2" />
 </android.support.constraint.ConstraintLayout>
