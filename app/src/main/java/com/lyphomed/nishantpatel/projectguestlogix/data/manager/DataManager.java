@@ -22,25 +22,21 @@ import io.reactivex.Single;
  * Use DataManager methods from Presenters to deal with any business related logic
  */
 public class DataManager implements DataContract {
-    private static DataInsertionUseCase mDataInsertionUseCase;
-    private static DataAvailabilityUseCase sDataAvailabilityUseCase;
-    private static DataQueryUseCase sDataQueryUseCase;
-    private static DataManager sDataManager;
     private static AirlinesDatabase sAirlinesDatabase;
-
-    // DataManager singleton
-    public static DataManager getInstance() {
-        if (sDataManager == null) {
-            sDataManager = new DataManager();
-            mDataInsertionUseCase = new DataInsertionUseCase(sAirlinesDatabase);
-            sDataAvailabilityUseCase = new DataAvailabilityUseCase(sAirlinesDatabase);
-            sDataQueryUseCase = new DataQueryUseCase(sAirlinesDatabase);
-        }
-        return sDataManager;
-    }
+    private DataInsertionUseCase mDataInsertionUseCase;
+    private DataAvailabilityUseCase mDataAvailabilityUseCase;
+    private DataQueryUseCase mDataQueryUseCase;
 
     private DataManager() {
         //Private constructor, so no one can make an object of DataManager
+        mDataInsertionUseCase = new DataInsertionUseCase(sAirlinesDatabase);
+        mDataAvailabilityUseCase = new DataAvailabilityUseCase(sAirlinesDatabase);
+        mDataQueryUseCase = new DataQueryUseCase(sAirlinesDatabase);
+    }
+
+    // DataManager singleton
+    public static DataManager getInstance() {
+        return SingletonHelper.INSTANCE;
     }
 
     /**
@@ -72,26 +68,30 @@ public class DataManager implements DataContract {
 
     @Override
     public void checkDataAvailability(OnTaskCompletion callback) {
-        sDataAvailabilityUseCase.checkDataAvailability(callback);
+        mDataAvailabilityUseCase.checkDataAvailability(callback);
     }
 
     @Override
     public Flowable<List<Routes>> provideFlightDetails(String origin, String destination) {
-        return sDataQueryUseCase.provideFlightDetails(origin, destination);
+        return mDataQueryUseCase.provideFlightDetails(origin, destination);
     }
 
     @Override
     public Maybe<Airports> provideAirportFromIata3(String iata3) {
-        return sDataQueryUseCase.provideAirportFromIata3(iata3);
+        return mDataQueryUseCase.provideAirportFromIata3(iata3);
     }
 
     @Override
     public Flowable<List<Routes>> provideAllPathsToViaLocation(String origin, String destination) {
-        return sDataQueryUseCase.provideAllPathsToViaLocation(origin, destination);
+        return mDataQueryUseCase.provideAllPathsToViaLocation(origin, destination);
     }
 
     @Override
     public Flowable<ViaRoute> provideFullPathWithViaLocation(String origin, String destination) {
-        return sDataQueryUseCase.provideFullPathsWithViaDestination(origin, destination);
+        return mDataQueryUseCase.provideFullPathsWithViaDestination(origin, destination);
+    }
+
+    private static class SingletonHelper {
+        private static final DataManager INSTANCE = new DataManager();
     }
 }
