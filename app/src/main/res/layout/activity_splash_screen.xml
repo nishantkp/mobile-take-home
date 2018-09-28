@@ -16,7 +16,7 @@
         android:layout_marginStart="8dp"
         android:fontFamily="@font/raleway_light"
         android:text="@string/logo_part_1"
-        android:textColor="#EDE7EC"
+        android:textColor="@color/colorPrimaryVeryLight"
         android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/raleway_semibold"
         android:text="@string/logo_part_2"
-        android:textColor="#EDE7EC"
+        android:textColor="@color/colorPrimaryVeryLight"
         android:textSize="34sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/splash_screen_tv_1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:indeterminate="true"
-        android:indeterminateTint="#EE9B43"
+        android:indeterminateTint="@color/colorAccentSecond"
         app:layout_constraintBottom_toTopOf="@+id/splash_screen_tv_2"
         app:layout_constraintEnd_toEndOf="@+id/splash_screen_tv_2" />
 </android.support.constraint.ConstraintLayout>

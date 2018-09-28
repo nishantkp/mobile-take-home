@@ -87,7 +87,7 @@
             android:layout_marginTop="16dp"
             android:fontFamily="@font/raleway_medium"
             android:text="@string/welcome_error_message"
-            android:textColor="#EE9B43"
+            android:textColor="@color/colorAccentSecond"
             android:textSize="12sp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
