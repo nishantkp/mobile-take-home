@@ -12,7 +12,6 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
-import io.reactivex.Single;
 
 /**
  * Database DAO : database interaction methods

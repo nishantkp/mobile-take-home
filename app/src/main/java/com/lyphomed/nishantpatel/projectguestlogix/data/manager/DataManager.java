@@ -15,7 +15,6 @@ import java.util.List;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 
 /**
  * Manager which deals with all the business logic,

@@ -9,7 +9,6 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
-import io.reactivex.Single;
 
 /**
  * Data query use case, which deals with querying data from database tables
