@@ -3,28 +3,26 @@ package com.lyphomed.nishantpatel.projectguestlogix.ui.welcome;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import com.lyphomed.nishantpatel.projectguestlogix.R;
+import com.lyphomed.nishantpatel.projectguestlogix.base.BaseActivity;
 import com.lyphomed.nishantpatel.projectguestlogix.config.PublicKeys;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.databinding.ActivityWelcomeBinding;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.dashboard.DashboardActivity;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.UserQuery;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
  * Welcome activity which deals with getting query from user and launch {@link DashboardActivity}
  */
-public class WelcomeActivity extends AppCompatActivity implements WelcomeContract.View {
+public class WelcomeActivity extends BaseActivity implements WelcomeContract.View {
 
     private static final String LOG_TAG = WelcomeActivity.class.getSimpleName();
-    private CompositeDisposable mCompositeDisposable;
     private ActivityWelcomeBinding mBinding;
 
     /**
@@ -47,14 +45,6 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContrac
 
         mBinding.setUser(new UserQuery());
         mBinding.setPresenter(welcomePresenter);
-
-        mCompositeDisposable = new CompositeDisposable();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mCompositeDisposable.dispose();
     }
 
     @Override
@@ -106,6 +96,6 @@ public class WelcomeActivity extends AppCompatActivity implements WelcomeContrac
 
     @Override
     public void onDisposables(Disposable d) {
-        mCompositeDisposable.add(d);
+        baseCompositeDisposable.add(d);
     }
 }

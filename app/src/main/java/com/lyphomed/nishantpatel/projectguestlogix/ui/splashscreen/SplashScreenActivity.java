@@ -2,33 +2,29 @@ package com.lyphomed.nishantpatel.projectguestlogix.ui.splashscreen;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.lyphomed.nishantpatel.projectguestlogix.R;
+import com.lyphomed.nishantpatel.projectguestlogix.base.BaseActivity;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.welcome.WelcomeActivity;
 import com.lyphomed.nishantpatel.projectguestlogix.utils.TableDataCreation;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
  * Splash screen activity which also deals with populating database table on background
  * thread
  */
-public class SplashScreenActivity extends AppCompatActivity implements SplashScreenContract.View {
+public class SplashScreenActivity extends BaseActivity implements SplashScreenContract.View {
 
     // Time in milli seconds for splash screen
     private static final int SPLASH_TIME_OUT = 2500;
-    private CompositeDisposable mCompositeDisposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
-        mCompositeDisposable = new CompositeDisposable();
 
         SplashScreenPresenter splashScreenPresenter =
                 new SplashScreenPresenter(DataManager.getInstance(), new TableDataCreation(this));
@@ -39,14 +35,8 @@ public class SplashScreenActivity extends AppCompatActivity implements SplashScr
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mCompositeDisposable.dispose();
-    }
-
-    @Override
     public void onDisposables(Disposable d) {
-        mCompositeDisposable.add(d);
+        baseCompositeDisposable.add(d);
     }
 
     @Override

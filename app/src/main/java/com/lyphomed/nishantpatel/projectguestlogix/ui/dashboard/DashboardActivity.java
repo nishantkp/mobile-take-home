@@ -3,13 +3,13 @@ package com.lyphomed.nishantpatel.projectguestlogix.ui.dashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 
 import com.lyphomed.nishantpatel.projectguestlogix.R;
+import com.lyphomed.nishantpatel.projectguestlogix.base.BaseActivity;
 import com.lyphomed.nishantpatel.projectguestlogix.config.PublicKeys;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airports;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
@@ -22,15 +22,12 @@ import com.lyphomed.nishantpatel.projectguestlogix.ui.model.UserQuery;
 
 import java.util.List;
 
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public class DashboardActivity extends AppCompatActivity
+public class DashboardActivity extends BaseActivity
         implements DashboardContract.View, FlightsAdapter.OnDirectPathItemClick,
         FlightsAdapter.OnViaPathItemClick {
 
-    // Disposable object for flowable to dispose in onDestroy()
-    private CompositeDisposable mCompositeDisposable;
     private ActivityDashboardBinding mBinding;
     private FlightsAdapter mAdapter;
 
@@ -58,7 +55,6 @@ public class DashboardActivity extends AppCompatActivity
             destination = getIntent().getStringExtra(PublicKeys.USER_DESTINATION).toUpperCase();
             mBinding.dashboardHeader.setUserQuery(new UserQuery(origin, destination));
         }
-        mCompositeDisposable = new CompositeDisposable();
         DashboardPresenter dashboardPresenter = new DashboardPresenter(DataManager.getInstance());
         dashboardPresenter.attachView(this);
         mAdapter = new FlightsAdapter(this, this);
@@ -72,14 +68,8 @@ public class DashboardActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mCompositeDisposable.dispose();
-    }
-
-    @Override
     public void onDisposable(Disposable disposable) {
-        mCompositeDisposable.add(disposable);
+        baseCompositeDisposable.add(disposable);
     }
 
     @Override
