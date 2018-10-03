@@ -21,6 +21,24 @@ public class DataQueryUseCase {
     }
 
     /**
+     * Use this method to get the all the airports store in database
+     *
+     * @return Flowable list of airports
+     */
+    public Flowable<List<Airports>> provideAirports() {
+        return mAirlinesDatabase.getAirlinesDao().getAllAirports();
+    }
+
+    /**
+     * Use this method to get the all the routes store in database
+     *
+     * @return Flowable list of routes
+     */
+    public Flowable<List<Routes>> provideRoutes() {
+        return mAirlinesDatabase.getAirlinesDao().getAllRoutes();
+    }
+
+    /**
      * Use this method to get the direct path between origin and destination
      * <p>
      * NOTE: Don't forget to subscribe flowable on Schedules.io() and observe on

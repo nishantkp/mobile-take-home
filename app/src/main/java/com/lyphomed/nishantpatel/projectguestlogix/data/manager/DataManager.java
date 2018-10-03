@@ -90,6 +90,16 @@ public class DataManager implements DataContract {
         return mDataQueryUseCase.provideFullPathsWithViaDestination(origin, destination);
     }
 
+    @Override
+    public Flowable<List<Airports>> provideAirports() {
+        return mDataQueryUseCase.provideAirports();
+    }
+
+    @Override
+    public Flowable<List<Routes>> provideRoutes() {
+        return mDataQueryUseCase.provideRoutes();
+    }
+
     private static class SingletonHelper {
         private static final DataManager INSTANCE = new DataManager();
     }

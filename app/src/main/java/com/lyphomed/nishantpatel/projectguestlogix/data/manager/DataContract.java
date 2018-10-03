@@ -27,5 +27,9 @@ interface DataContract {
 
     Flowable<ViaRoute> provideFullPathWithViaLocation(String origin, String destination);
 
+    Flowable<List<Airports>> provideAirports();
+
+    Flowable<List<Routes>> provideRoutes();
+
     void checkDataAvailability(OnTaskCompletion callback);
 }
