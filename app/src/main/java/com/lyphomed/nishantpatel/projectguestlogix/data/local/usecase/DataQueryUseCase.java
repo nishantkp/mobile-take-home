@@ -67,7 +67,7 @@ public class DataQueryUseCase {
      * Call this method to get the all the possible routes with "Via" destination
      * <p>
      * Below method first finds the all possible routes from origin to "via" location
-     * Then it uses flatMapIterable to loop through each route finds the "via" location to
+     * Then it uses flatMapIterable to loop through each route to find the "via" location
      * <p>
      * NOTE: Don't forget to subscribe flowable on Schedules.io() and observe on
      * AndroidSchedulers.mainThread() to query database table on rx schedulers thread
