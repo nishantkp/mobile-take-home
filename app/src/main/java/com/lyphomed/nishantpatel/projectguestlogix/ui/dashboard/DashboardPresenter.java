@@ -97,6 +97,11 @@ public class DashboardPresenter
         getView().onDisposable(disposable);
     }
 
+    /**
+     * Call this method to get the destination airport details from IATA3 code
+     *
+     * @param iata3 destination airport IATA3 code
+     */
     @Override
     public void getDestinationAirport(String iata3) {
         Disposable disposable =
@@ -107,6 +112,11 @@ public class DashboardPresenter
         getView().onDisposable(disposable);
     }
 
+    /**
+     * Call this method to get the origin airport details from IATA3 code
+     *
+     * @param iata3 origin airport IATA3 code
+     */
     @Override
     public void getOriginAirport(String iata3) {
         Disposable disposable =
@@ -117,6 +127,16 @@ public class DashboardPresenter
         getView().onDisposable(disposable);
     }
 
+    /**
+     * Call this method to find the flight connections with least transfers
+     * If there are paths from origin to destination like direct, one transfer, two transfer....
+     * i.e transfer means "via" point
+     * <p>
+     * The method will give list of nodes containing least transfers
+     *
+     * @param origin      IATA3 code for origin
+     * @param destination IATA3 code for destination
+     */
     @Override
     public void findFlightConnectionsBFS(String origin, String destination) {
         Disposable d = mDataManager.provideNodesWithEdges()
