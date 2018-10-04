@@ -1,5 +1,7 @@
 package com.lyphomed.nishantpatel.projectguestlogix.ui.welcome;
 
+import android.text.TextUtils;
+
 import com.lyphomed.nishantpatel.projectguestlogix.base.BasePresenter;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 
@@ -32,18 +34,29 @@ public class WelcomePresenter extends BasePresenter<WelcomeContract.View>
 
     @Override
     public void onUserQuerySubmit(String origin, String destination) {
-        // When user enters origin and destination code same, throw an error
-        if (origin.equals(destination)) {
+        // User Query validation before searching through database
+
+        if (origin == null && destination == null) {
+            getView().onDestinationCodeError();
+            getView().onOriginCodeError();
+            return;
+        } else if (origin == null || TextUtils.isEmpty(origin)) {
+            getView().onOriginCodeError();
+            return;
+        } else if (destination == null || TextUtils.isEmpty(destination)) {
+            getView().onDestinationCodeError();
+            return;
+        } else if (origin.equals(destination)) {
             getView().onError("Origin and destination should not be same!");
             return;
         }
+
         Disposable disposable = mDataManager.provideAirportFromIata3(origin)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnEvent((airport, error) -> {
                     if (airport == null && error == null) {
                         getView().onOriginCodeError();
-                        getView().onError("Provide valid origin code!");
                     } else {
                         getView().onOriginCodeCorrect();
                         mDataManager.provideAirportFromIata3(destination)
@@ -52,7 +65,6 @@ public class WelcomePresenter extends BasePresenter<WelcomeContract.View>
                                 .doOnEvent((a, e) -> {
                                     if (a == null && e == null) {
                                         getView().onDestinationCodeError();
-                                        getView().onError("Provide valid destination code!");
                                     } else {
                                         getView().onDestinationCodeCorrect();
                                         getView().onQuerySubmit(origin, destination);
