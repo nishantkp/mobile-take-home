@@ -4,9 +4,11 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.callbacks.OnTaskCo
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Airports;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.ViaRoute;
+import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Node;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
@@ -30,6 +32,8 @@ interface DataContract {
     Flowable<List<Airports>> provideAirports();
 
     Flowable<List<Routes>> provideRoutes();
+
+    Flowable<Map<String, Node>> provideNodesWithEdges();
 
     void checkDataAvailability(OnTaskCompletion callback);
 }

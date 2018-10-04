@@ -1,13 +1,18 @@
 package com.lyphomed.nishantpatel.projectguestlogix.ui.dashboard;
 
+import android.util.Log;
+
 import com.lyphomed.nishantpatel.projectguestlogix.base.BasePresenter;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
+import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Graph;
+import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Node;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -110,5 +115,29 @@ public class DashboardPresenter
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(airport -> getView().onOriginAirportDetail(airport));
         getView().onDisposable(disposable);
+    }
+
+    @Override
+    public void findFlightConnectionsBFS(String origin, String destination) {
+        Disposable d = mDataManager.provideNodesWithEdges()
+                .flatMap(data -> {
+                    // Create a graph for BFS
+                    Graph graph = new Graph();
+                    graph.setNodeLookUp(data);
+                    List<Node> fullPathWithNodes = new ArrayList<>();
+                    boolean val = graph.hasPathBFS(origin, destination);
+                    if (val) {
+                        fullPathWithNodes = graph.breadthFirstSearch(origin, destination);
+                    }
+                    return Flowable.just(fullPathWithNodes);
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(data -> {
+                    for (Node node : data) {
+                        Log.i("PATH", "PATH IS FROM " + node.getNodeLabel());
+                    }
+                });
+        getView().onDisposable(d);
     }
 }

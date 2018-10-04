@@ -7,10 +7,15 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.schema.Ai
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataAvailabilityUseCase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataInsertionUseCase;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.DataQueryUseCase;
+import com.lyphomed.nishantpatel.projectguestlogix.data.local.usecase.GraphUseCase;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.ViaRoute;
+import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Graph;
+import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Node;
 
 import java.io.InputStream;
+import java.security.spec.MGF1ParameterSpec;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
@@ -25,12 +30,14 @@ public class DataManager implements DataContract {
     private DataInsertionUseCase mDataInsertionUseCase;
     private DataAvailabilityUseCase mDataAvailabilityUseCase;
     private DataQueryUseCase mDataQueryUseCase;
+    private GraphUseCase mGraphUseCase;
 
     private DataManager() {
         //Private constructor, so no one can make an object of DataManager
         mDataInsertionUseCase = new DataInsertionUseCase(sAirlinesDatabase);
         mDataAvailabilityUseCase = new DataAvailabilityUseCase(sAirlinesDatabase);
         mDataQueryUseCase = new DataQueryUseCase(sAirlinesDatabase);
+        mGraphUseCase = new GraphUseCase(sAirlinesDatabase);
     }
 
     // DataManager singleton
@@ -98,6 +105,11 @@ public class DataManager implements DataContract {
     @Override
     public Flowable<List<Routes>> provideRoutes() {
         return mDataQueryUseCase.provideRoutes();
+    }
+
+    @Override
+    public Flowable<Map<String, Node>> provideNodesWithEdges() {
+        return mGraphUseCase.provideNodesWithEdges();
     }
 
     private static class SingletonHelper {

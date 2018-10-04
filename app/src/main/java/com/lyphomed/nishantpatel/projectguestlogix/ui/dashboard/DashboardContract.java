@@ -30,6 +30,8 @@ public interface DashboardContract {
 
         void findFlightPathWithViaLocation(String origin, String destination);
 
+        void findFlightConnectionsBFS(String origin, String destination);
+
         void getOriginAirport(String iata3);
 
         void getDestinationAirport(String iata3);
