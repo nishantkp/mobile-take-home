@@ -26,3 +26,11 @@ The application may be done in Xamarin or in any native language that runs on th
 ### Questions
 
 If you have any questions during the challenge feel free to email Peter Samsonov at psamsonov@guestlogix.com. Whether it be a question about the requirements, submitting, anything, just send the email!
+
+### Solution
+
+#### provided by Nishant
+
+### ux
+
+<img src="/ux/splash-screen.png" width="200"> <img src="/ux/welcome-1.png" width="200"> <img src="/ux/welcome-2.png" width="200"> <img src="/ux/dashboard-1.png" width="200"> <img src="/ux/dashboard-2.png" width="200">
