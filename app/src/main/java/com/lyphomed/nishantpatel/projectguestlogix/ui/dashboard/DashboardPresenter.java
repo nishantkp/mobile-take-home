@@ -139,17 +139,12 @@ public class DashboardPresenter
      */
     @Override
     public void findFlightConnectionsBFS(String origin, String destination) {
-        Disposable d = mDataManager.provideNodesWithEdges()
+        Disposable disposable = mDataManager.provideNodesWithEdges()
                 .flatMap(data -> {
                     // Create a graph for BFS
                     Graph graph = new Graph();
                     graph.setNodeLookUp(data);
-                    List<Node> fullPathWithNodes = new ArrayList<>();
-                    boolean val = graph.hasPathBFS(origin, destination);
-                    if (val) {
-                        fullPathWithNodes = graph.breadthFirstSearch(origin, destination);
-                    }
-                    return Flowable.just(fullPathWithNodes);
+                    return Flowable.just(graph.breadthFirstSearch(origin, destination));
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -158,6 +153,6 @@ public class DashboardPresenter
                         Log.i("PATH", "PATH IS FROM " + node.getNodeLabel());
                     }
                 });
-        getView().onDisposable(d);
+        getView().onDisposable(disposable);
     }
 }
