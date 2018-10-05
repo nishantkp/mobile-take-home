@@ -6,8 +6,12 @@ import com.lyphomed.nishantpatel.projectguestlogix.base.BasePresenter;
 import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Routes;
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
+import com.lyphomed.nishantpatel.projectguestlogix.ui.model.TwoStopRoute;
+import com.lyphomed.nishantpatel.projectguestlogix.ui.model.ViaRoute;
 import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Graph;
 import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Node;
+
+import org.reactivestreams.Publisher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +77,7 @@ public class DashboardPresenter
     public void findFlightPathWithViaLocation(String origin, String destination) {
         Disposable disposable =
                 mDataManager.provideFullPathWithViaLocation(origin, destination)
+                        .onErrorResumeNext((Publisher<? extends ViaRoute>) e -> findFlightConnectionsBFS(origin, destination))
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(viaRoute -> {
@@ -146,13 +151,65 @@ public class DashboardPresenter
                     graph.setNodeLookUp(data);
                     return Flowable.just(graph.breadthFirstSearch(origin, destination));
                 })
+                .filter(data -> data.size() == 4) // Filter ensures that we only get two stoppage path
+                .flatMap(this::makeFlightConnectionsFromTwoStoppage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(data -> {
-                    for (Node node : data) {
-                        Log.i("PATH", "PATH IS FROM " + node.getNodeLabel());
+                .subscribe(fullViaPathList -> {
+                    for (FullViaPath route : fullViaPathList) {
+                        Log.i("PATH", "\nFirst Route:  departure from " + route.getOrigin() + " to " + route.getFirstVia() + " in " + route.getOriginToFirstViaFlight()
+                                + "\nSecond Route:  departure from " + route.getFirstVia() + " to " + route.getSecondVia() + " in " + route.getFirstViaToSecondViaFlight()
+                                + "\nThird Route:  departure from " + route.getSecondVia() + " to " + route.getDestination() + " in " + route.getSecondViaToDestinationFlight());
                     }
                 });
         getView().onDisposable(disposable);
+    }
+
+    /**
+     * Use this method to get all the available flight options between origin and destination with
+     * two stops
+     *
+     * @param data list of nodes containing all the airports IATA3 codes
+     * @return list of {@link FullViaPath} object, and each object contains origin, destination,
+     * first via, second via IATA3 code and airline codes for origin-firstVia, firstVia-secondVia,
+     * secondVia-destination
+     */
+    private Flowable<List<FullViaPath>> makeFlightConnectionsFromTwoStoppage(List<Node> data) {
+        String departure = data.get(0).getNodeLabel();  // Origin IATA3 code
+        String firstStop = data.get(1).getNodeLabel();  // First stop IATA3 code
+        String secondStop = data.get(2).getNodeLabel(); // Second stop IATA3 code
+        String arrival = data.get(3).getNodeLabel();    // Destination IATA3 code
+
+        Flowable<List<Routes>> dToF = mDataManager.provideFlightDetails(departure, firstStop);
+        Flowable<List<Routes>> fToS = mDataManager.provideFlightDetails(firstStop, secondStop);
+        Flowable<List<Routes>> sToA = mDataManager.provideFlightDetails(secondStop, arrival);
+
+        return Flowable.zip(dToF, fToS, sToA, TwoStopRoute::new)
+                .flatMap(twoStopRoute -> {
+                    List<Routes> firstRoute = twoStopRoute.getFirstRoute();
+                    List<Routes> secondRoute = twoStopRoute.getSecondRoute();
+                    List<Routes> thirdRoute = twoStopRoute.getThirdRoute();
+                    List<FullViaPath> fullViaPaths = new ArrayList<>();
+
+                    // Make FullViaPath object with details like,
+                    // origin, destination, first via, second via and flight connecting them
+                    for (Routes routes1 : firstRoute) {
+                        for (Routes routes2 : secondRoute) {
+                            for (Routes routes3 : thirdRoute) {
+                                fullViaPaths.add(
+                                        new FullViaPath(routes1.getOrigin(),
+                                                routes1.getDestination(),
+                                                routes2.getDestination(),
+                                                routes3.getDestination(),
+                                                routes1.getAirlineCode(),
+                                                routes2.getAirlineCode(),
+                                                routes3.getAirlineCode()
+                                        )
+                                );
+                            }
+                        }
+                    }
+                    return Flowable.just(fullViaPaths);
+                });
     }
 }
