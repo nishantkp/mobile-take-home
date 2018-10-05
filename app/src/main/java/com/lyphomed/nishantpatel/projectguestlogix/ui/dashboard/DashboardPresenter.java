@@ -7,11 +7,8 @@ import com.lyphomed.nishantpatel.projectguestlogix.data.local.database.model.Rou
 import com.lyphomed.nishantpatel.projectguestlogix.data.manager.DataManager;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.FullViaPath;
 import com.lyphomed.nishantpatel.projectguestlogix.ui.model.TwoStopRoute;
-import com.lyphomed.nishantpatel.projectguestlogix.ui.model.ViaRoute;
 import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Graph;
 import com.lyphomed.nishantpatel.projectguestlogix.utils.bws.Node;
-
-import org.reactivestreams.Publisher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +73,7 @@ public class DashboardPresenter
     @Override
     public void findFlightPathWithViaLocation(String origin, String destination) {
         Disposable disposable =
-                mDataManager.provideFullPathWithViaLocation(origin, destination)
-                        .onErrorResumeNext((Publisher<? extends ViaRoute>) e -> findFlightConnectionsBFS(origin, destination))
+                mDataManager.provideFullPathWithViaLocation(origin, destination).toObservable()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(viaRoute -> {
